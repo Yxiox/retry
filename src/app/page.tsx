@@ -1,33 +1,18 @@
-"use client";
 // pages/index.tsx
-import { useEffect, useState } from 'react';
+import { sql } from "@vercel/postgres";
 
-type User = {
-  id: number;
-  name: string;
-  password: string;
-};
-
-export default function Home() {
-  const [users, setUsers] = useState<User[]>([]);
-
-  useEffect(() => {
-    async function fetchUsers() {
-      const response = await fetch('/api/users');
-      const data = await response.json();
-      setUsers(data);
-    }
-
-    fetchUsers();
-  }, []);
+// eslint-disable-next-line @next/next/no-async-client-component
+export default async function Home() {
+  
+  const { rows } = await sql`SELECT * from users`;
 
   return (
     <div>
       <h1>Users</h1>
       <ul>
-        {users.map((user) => (
+        {rows.map((user) => (
           <li key={user.id}>
-            {user.name} - {user.password}
+            {user.username} - {user.password}
           </li>
         ))}
       </ul>
