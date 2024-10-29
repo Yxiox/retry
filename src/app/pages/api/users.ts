@@ -1,6 +1,6 @@
 // pages/api/users.ts
 import type { NextApiRequest, NextApiResponse } from "next";
-import { query } from "../../../../node_modules/pg/lib/db";
+import { query } from "../../lib/db";
 
 type User = {
   id: number;
