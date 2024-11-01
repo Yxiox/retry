@@ -1,0 +1,30 @@
+main{
+    padding: 5% 10% 5% 10%;
+    
+}
+
+#tabela table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+#tabela th, #tabela td {
+    padding: 5px;
+    text-align: center;
+}
+
+#tabela th {
+    background-color: #4285F4; 
+    color: white;
+    font-weight: bold;
+    width: 33.33%;
+}
+
+#tabela tbody tr:nth-child(odd) {
+    background-color: #d6e4fc; 
+}
+
+#tabela tbody tr:nth-child(even) {
+    background-color: #eaf2fe; 
+}

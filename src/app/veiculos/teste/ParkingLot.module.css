@@ -1,0 +1,100 @@
+/* components/ParkingLot.module.css */
+.parkingLot {
+    margin: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .spots {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(2, 100px);
+
+  }
+  
+  .spot {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #333;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .car {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s;
+  }
+
+  .car span{
+    color: black
+  }
+  
+  .plate {
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    position: absolute;
+    top: -20px;
+  }
+  
+  .actions {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    position: absolute;
+    top: 20px;
+    transform: scale(0.95);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  .car:hover .actions {
+    display: flex;
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .actionButton {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .actionButton:hover {
+    background-color: #ddd;
+  }
+  
+  .addButton {
+    position: absolute;
+    top: 50%;
+    right: 20%;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border: 1px solid #333;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .addButton:hover {
+    background-color: #ddd;
+  }
+  

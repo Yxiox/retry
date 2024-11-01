@@ -1,6 +1,5 @@
 // pages/index.tsx
 import { sql } from "@vercel/postgres";
-import Link from "next/link";
 
 // eslint-disable-next-line @next/next/no-async-client-component
 export default async function Home() {
@@ -10,7 +9,6 @@ export default async function Home() {
   return (
     <div>
       <h1>Users</h1>
-      <Link href="/veiculos">Veiculos</Link>
       <ul>
         {rows.map((user) => (
           <li key={user.id}>

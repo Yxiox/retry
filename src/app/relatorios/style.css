@@ -1,0 +1,60 @@
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+#main_div{
+    margin-top: 7%;
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    gap: 10px;
+}
+
+#main_buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    gap: 2%;
+}
+
+#main_buttons button{
+    width: 100%;
+}
+
+#graficos{
+    width: 100%;
+}
+
+#graficos a{
+    width: 100%;
+}
+
+#tabela table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+#tabela th, #tabela td {
+    padding: 5px;
+    text-align: center;
+}
+
+#tabela th {
+    background-color: #4285F4; 
+    color: white;
+    font-weight: bold;
+}
+
+#tabela tbody tr:nth-child(odd) {
+    background-color: #d6e4fc; 
+}
+
+#tabela tbody tr:nth-child(even) {
+    background-color: #eaf2fe; 
+}
