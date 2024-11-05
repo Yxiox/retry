@@ -1,18 +1,17 @@
-import { sql } from "@vercel/postgres";
+// import { sql } from "@vercel/postgres";
 import "./style.css"
+import { GET } from "../../app/api/veiculos/route";
+
 import Cadastrar_Veiculo from "@/components/Cadastrar_Veiculo/Cadastrar_Veiculo";
 
 export default async function Home(){
 
-    const { rows } = await sql`SELECT v.placa, v.modelo, v.cor, c.nome from veiculo as v inner join cliente as c on v.cliente_id = c.id`;
-    
-   
+    // const { rows } = await sql`SELECT v.placa, v.modelo, v.cor, c.nome from veiculo as v inner join cliente as c on v.cliente_id = c.id`;
+    const { rows } = await GET();
 
     return(
         <main>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white  px-4 py-1 my-4 rounded w-full">Cadastrar</button>
-
-            <div id="tabela">
+            <div id="tabela" className="py-10">
                     <table>
                         <thead>
                             <tr>

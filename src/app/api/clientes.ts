@@ -1,11 +1,11 @@
 // pages/api/users.ts
 import type { NextApiRequest, NextApiResponse } from "next";
-import { query } from "../../lib/db";
+import { query } from "../lib/db";
 
-type User = {
+type Cliente = {
   id: number;
   name: string;
-  password: string;
+  CPF: string;
 };
 
 export default async function handler(
@@ -13,11 +13,11 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const result = await query("SELECT * FROM users"); // Exemplo de tabela 'users'
-    const users: User[] = result.rows;
+    const result = await query("SELECT * FROM cliente");
+    const users: Cliente[] = result.rows;
     res.status(200).json(users);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Error fetching users" });
+    res.status(500).json({ message: "Error fetching clientes" });
   }
 }

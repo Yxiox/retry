@@ -1,6 +1,7 @@
 // pages/index.tsx
 import { sql } from "@vercel/postgres";
 
+
 // eslint-disable-next-line @next/next/no-async-client-component
 export default async function Home() {
   
