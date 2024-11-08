@@ -1,42 +1,50 @@
-// import { sql } from "@vercel/postgres";
-import "./style.css"
-import { GET } from "../../app/api/veiculos/route";
+import "./style.css";
+import * as veiculos from "../../app/api/veiculos/route";
+import * as clientes from "../../app/api/clientes/route";
+import Cadastrar_Window from "@/components/Cadastrar_Veiculo/Cadastrar_Veiculo";
 
-import Cadastrar_Veiculo from "@/components/Cadastrar_Veiculo/Cadastrar_Veiculo";
+export default async function Home() {
+    
+    const { rows } = await veiculos.GET();
+    const newLocal = await clientes.GET();
 
-export default async function Home(){
+    const lista_clientes = newLocal.rows.map((row) => ({
+        id: row.id,
+        nome: row.nome,
+        CPF: row.CPF,
+    }));
 
-    // const { rows } = await sql`SELECT v.placa, v.modelo, v.cor, c.nome from veiculo as v inner join cliente as c on v.cliente_id = c.id`;
-    const { rows } = await GET();
 
-    return(
+    console.log(newLocal);
+
+    return (
         <main>
             <div id="tabela" className="py-10">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Placa</th>
-                                <th>Modelo</th>
-                                <th>Cor</th>
-                                <th>Dono</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Placa</th>
+                            <th>Modelo</th>
+                            <th>Cor</th>
+                            <th>Dono</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         {rows.map((row, index) => (
                             <tr key={index}>
+                                <td>{index + 1}</td>
                                 <td>{row.placa}</td>
                                 <td>{row.modelo}</td>
                                 <td>{row.cor}</td>
                                 <td>{row.nome}</td>
                             </tr>
                         ))}
-                        </tbody>
-                    </table>
-                </div>
-                        
-                <Cadastrar_Veiculo></Cadastrar_Veiculo>
-        </main>   
-    
-)
-    
+                    </tbody>
+                </table>
+            </div>
+
+            <Cadastrar_Window clientes={lista_clientes} />
+        </main>
+    );
 }

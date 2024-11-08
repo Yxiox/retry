@@ -1,9 +1,9 @@
-import { sql } from "@vercel/postgres";
 import "./style.css"
+import { GET } from "../api/clientes/route";
 
 export default async function Home(){
 
-    const { rows } = await sql`SELECT * from cliente`;
+    const { rows } = await GET();
     
     return(
         <main>
