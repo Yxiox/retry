@@ -3,7 +3,8 @@ describe("Login Screen", () => {
     cy.visit("http://localhost:3000/login");
   });
 
-  it("deveria mostrar sucesso ao logar", () => {
+  it('should display "Login successful!" alert for valid credentials', () => {
+    // Replace with valid credentials for testing
     cy.get("#user").type("admin");
     cy.get("#password").type("admin");
 
@@ -12,12 +13,12 @@ describe("Login Screen", () => {
     cy.contains("Logado com sucesso!");
   });
 
-  it("deveria mostrar insucesso ao logar", () => {
-    cy.get("#user").type("hakuna");
-    cy.get("#password").type("matata");
+  it('should display "Invalid username or password." alert for invalid credentials', () => {
+    // Enter invalid credentials
+    cy.get("#user").type("invalidUsername");
+    cy.get("#password").type("invalidPassword");
 
     cy.contains("button", "Submit").click();
-
-    cy.contains("Nome de usuário ou senha inválidos.").should("be.visible");
+    cy.contains("Nome de usuário ou senha inválidos.");
   });
 });

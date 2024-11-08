@@ -65,10 +65,11 @@ export default function Home() {
         value={inputPassword}
         onChange={(e) => setInputPassword(e.target.value)}
         />
-      <button onClick={handleSubmit} className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded">
+      <button onClick={handleSubmit} className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded"
+      id="submit">
         Submit
       </button>
-      {message && <p>{message}</p>}
+      {message && <p id="return">{message}</p>}
  </main>
   );
 }
