@@ -30,6 +30,7 @@ export default function Estacionar_Veiculo({Veiculos}:EstacionarWindowProps) {
 
     const response = await POST(true, data, hora, preco, carro_id);
     console.log(response);
+    location.href = "/estacionamento"
   };
 
   function defineVisible() {

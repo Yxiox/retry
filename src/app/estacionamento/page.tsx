@@ -5,6 +5,7 @@ import "./style.css";
 import * as movimento from "../api/movimento/route";
 import * as veiculo from "../api/veiculos/route";
 import Estacionar_Veiculo from "@/components/Estacionar_Veiculo/Estacionar_Veiculo";
+import Finalizar_Veiculo from "@/components/Finalizar_Veiculo/Finalizar_Veiculo";
 
 interface Movimento {
   id: number;
@@ -27,6 +28,8 @@ interface Veiculo {
 export default function Home() {
   const [movimentos, setMovimentos] = useState<Movimento[]>([]);
   const [veiculos, setVeiculos] = useState<Veiculo[]>([]);
+  const [showFinalizar, setShowFinalizar] = useState(false);
+  const [selectedMovimento, setSelectedMovimento] = useState<Movimento | null>(null);
 
   useEffect(() => {
     fetchData();
@@ -73,6 +76,11 @@ export default function Home() {
     }
   };
 
+  const handleFinalizarClick = (movimento: Movimento) => {
+    setSelectedMovimento(movimento);
+    setShowFinalizar(true);
+  };
+
   return (
     <main>
 
@@ -104,7 +112,7 @@ export default function Home() {
                     Excluir
                   </button>
                 </td>
-                <td><button className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-1 mx-1 my-1 rounded">
+                <td><button className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-1 mx-1 my-1 rounded" onClick={() => handleFinalizarClick(row)}>
                     $
                   </button></td>
                 </tr>
@@ -113,6 +121,14 @@ export default function Home() {
         </table>
       </div>
       <Estacionar_Veiculo Veiculos={veiculos}></Estacionar_Veiculo>
+
+      {showFinalizar && selectedMovimento && (
+        <Finalizar_Veiculo
+          movimento={selectedMovimento}
+          onClose={() => setShowFinalizar(false)}
+        />
+      )}
+
     </main>
   );
 }

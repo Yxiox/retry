@@ -23,7 +23,11 @@ export default function Home(){
                             </tr>
                         </thead>
                         <tbody>
-
+                        {/* {movimentos.map((row, index) => (
+                            <tr key={index}>
+                            <td>{row.hora_entrada}</td>
+                            <td>{row.placa}</td>
+                            <td>{row.modelo}</td>))} */}
                         </tbody>
                     </table>
                 </div>

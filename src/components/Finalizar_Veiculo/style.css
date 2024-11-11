@@ -1,0 +1,51 @@
+#Finalizar_veiculo{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    flex-direction: column;
+    background-color: white;
+    align-items: center;
+}
+
+#Finalizar_veiculo div{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: center
+}
+
+#Finalizar_veiculo input {
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 40px;
+    width: 40%;
+    text-align: center;
+}
+
+#Finalizar_veiculo select {
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 40px;
+    width: 40%;
+}
+
+#Finalizar {
+    position: fixed;
+    bottom: 45%;
+    right: 5%;
+}
+@media (max-width: 790px) {
+
+    #Finalizar {
+        position: fixed;
+        top: 8%;
+        left: 80%;
+        transform: translate(-50%, -50%);
+        height: 40px;
+        font-size: large;
+    }
+
+}
