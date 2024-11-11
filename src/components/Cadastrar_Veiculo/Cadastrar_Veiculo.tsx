@@ -22,12 +22,11 @@ export default function Cadastrar_Window({ clientes }: CadastrarWindowProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const response = await POST(placa, modelo, cor, Number(cliente_id));
-    const result = await response.json();
-    console.log(result);
-
-    window.location.reload();
+    if (placa.length == 7) {
+      const response = await POST(placa, modelo, cor, Number(cliente_id));
+      console.log(response);
+      location.href = "/veiculos";
+    }
   };
 
   function defineVisible() {
@@ -40,11 +39,11 @@ export default function Cadastrar_Window({ clientes }: CadastrarWindowProps) {
   return (
     <div>
       <button
-        className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-1 my-4 rounded w-4/5"
+        className="bg-blue-500 hover:bg-blue-700 text-white text-5xl px-2 rounded-full w-1/10"
         id="cadastrar"
         onClick={defineVisible}
       >
-        Cadastrar
+        +
       </button>
 
       <div id="cadastrar_veiculo" className="rounded py-7">
@@ -58,7 +57,7 @@ export default function Cadastrar_Window({ clientes }: CadastrarWindowProps) {
             X
           </button>
         </div>
-        <div>
+        <div className="w-full">
           <input
             type="text"
             name="placa"
@@ -76,7 +75,7 @@ export default function Cadastrar_Window({ clientes }: CadastrarWindowProps) {
             onChange={(e) => setModelo(e.target.value)}
           />
         </div>
-        <div>
+        <div className="w-full">
           <input
             type="text"
             name="cor"

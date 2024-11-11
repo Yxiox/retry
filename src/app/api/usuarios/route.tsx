@@ -1,18 +1,16 @@
 "use server";
 
-import { NextResponse } from "next/server";
-import { ApiHandler } from "@/shared/ApiHandler";
 import { sql } from "@vercel/postgres";
 
 export async function POST(
   usuario:string,
   senha:string,
-): Promise<NextResponse> {
+) {
   try {
-    const rows = sql`INSERT INTO user (username, password) VALUES (${usuario}, ${senha})`;
-    return ApiHandler.ResponseToJson(rows, 201);
+    const rows = await sql`INSERT INTO user (username, password) VALUES (${usuario}, ${senha})`;
+    return rows.rows;
 } catch (error) {
-  return ApiHandler.ResponseToJson(error, 500);
+  return error;
 }
 }
 

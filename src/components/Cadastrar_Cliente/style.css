@@ -1,4 +1,4 @@
-#cadastrar_veiculo{
+#cadastrar_cliente{
     position: fixed;
     top: 50%;
     left: 50%;
@@ -9,7 +9,7 @@
     align-items: center;
 }
 
-#cadastrar_veiculo div{
+#cadastrar_cliente div{
     display: flex;
     flex-direction: row;
     gap: 10px;
@@ -17,7 +17,7 @@
     justify-content: center
 }
 
-#cadastrar_veiculo input {
+#cadastrar_cliente input {
     border: 1px solid black;
     border-radius: 5px;
     height: 40px;
@@ -25,7 +25,7 @@
     text-align: center;
 }
 
-#cadastrar_veiculo select {
+#cadastrar_cliente select {
     border: 1px solid black;
     border-radius: 5px;
     height: 40px;

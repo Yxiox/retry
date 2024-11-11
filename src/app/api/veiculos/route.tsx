@@ -1,7 +1,5 @@
 "use server";
 
-import { NextResponse } from "next/server";
-import { ApiHandler } from "@/shared/ApiHandler";
 import { sql } from "@vercel/postgres";
 
 export async function POST(
@@ -9,16 +7,21 @@ export async function POST(
   modelo:string,
   cor:string,
   cliente_id: number
-): Promise<NextResponse> {
+) {
   try {
-    const rows = sql`INSERT INTO veiculo (placa, modelo, cor, cliente_id) VALUES (${placa}, ${modelo}, ${cor}, ${cliente_id})`;
-    return ApiHandler.ResponseToJson(rows, 201);
+    const rows = await sql`INSERT INTO veiculo (placa, modelo, cor, cliente_id) VALUES (${placa}, ${modelo}, ${cor}, ${cliente_id})`;
+    return rows.rows;
 } catch (error) {
-  return ApiHandler.ResponseToJson(error, 500);
+  return error;
 }
 }
-
 
 export async function GET() {
-  return sql`SELECT v.placa, v.modelo, v.cor, c.nome FROM veiculo AS v INNER JOIN cliente as c ON v.cliente_id = c.id`;
+  const result = await sql`SELECT veiculo.*, cliente.nome FROM veiculo INNER JOIN cliente ON veiculo.cliente_id = cliente.id`;
+  return result.rows;
+}
+
+export async function DELETE(id:number) {
+  const result = await sql`DELETE FROM veiculo WHERE id = ${id}`;
+  return result.rows;
 }

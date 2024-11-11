@@ -53,7 +53,7 @@ header {
   cursor: pointer;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 790px) {
   #hamburger {
       display: block;
   }

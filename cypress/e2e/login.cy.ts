@@ -3,8 +3,7 @@ describe("Login Screen", () => {
     cy.visit("http://localhost:3000/login");
   });
 
-  it('should display "Login successful!" alert for valid credentials', () => {
-    // Replace with valid credentials for testing
+  it("Login válido", () => {
     cy.get("#user").type("admin");
     cy.get("#password").type("admin");
 
@@ -13,8 +12,7 @@ describe("Login Screen", () => {
     cy.contains("Logado com sucesso!");
   });
 
-  it('should display "Invalid username or password." alert for invalid credentials', () => {
-    // Enter invalid credentials
+  it("Erro no login", () => {
     cy.get("#user").type("invalidUsername");
     cy.get("#password").type("invalidPassword");
 

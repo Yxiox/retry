@@ -3,6 +3,7 @@ main{
     
 }
 
+
 #tabela table {
     width: 100%;
     border-collapse: collapse;
@@ -18,7 +19,7 @@ main{
     background-color: #4285F4; 
     color: white;
     font-weight: bold;
-    width: 33.33%;
+    width: 20%;
 }
 
 #tabela tbody tr:nth-child(odd) {
@@ -28,3 +29,4 @@ main{
 #tabela tbody tr:nth-child(even) {
     background-color: #eaf2fe; 
 }
+
