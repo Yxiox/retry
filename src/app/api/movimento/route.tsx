@@ -40,9 +40,10 @@ export async function DELETE(id:number) {
 
 export async function UPDATE(data:string, endData:string, hora_saida:string, id:number ) {
   try{
+    // Exemplo de update que funcionou no banco:
+    // UPDATE movimento SET ativo=false, data=daterange('2024-11-4', '2024-11-11'), hora_saida='21:10:00' WHERE id = 3;
     const result = await sql`UPDATE movimento SET ativo=false, data=daterange(${data}, ${endData}), hora_saida=${hora_saida} WHERE id = ${id};`
     return result.rows;
-
   }
   catch (error){
     return error;

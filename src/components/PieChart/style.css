@@ -1,0 +1,15 @@
+
+
+@media (max-width: 790px) {
+    #pie{
+        width: 300px;
+        height: 300px;
+    }
+}
+
+@media (min-width: 791px) {
+    #pie{
+        width: 400px;
+        height: 400px;
+    }    
+}
