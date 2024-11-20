@@ -19,11 +19,12 @@ carro_id:number
 
 
 export async function GET() {
-  const result = await sql`SELECT movimento.*, veiculo.placa as placa, veiculo.modelo as modelo FROM movimento INNER JOIN veiculo ON movimento.carro_id = veiculo.id`;
+  const result = await sql`SELECT movimento.*, lower(movimento.data) as data_entrada, upper(movimento.data) as data_saida , veiculo.placa as placa, veiculo.modelo as modelo FROM movimento INNER JOIN veiculo ON movimento.carro_id = veiculo.id`;
   return  {rows: result.rows.map((row)=>({
     id:row.id,
     ativo:row.ativo,
-    data:row.data,
+    data_entrada:row.data_entrada,
+    data_saida:row.data_saida,
     hora_entrada:row.hora_entrada,
     hora_saida:row.hora_saida,
     preco:row.preco,

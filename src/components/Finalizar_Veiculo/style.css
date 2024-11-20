@@ -3,10 +3,11 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    display: none;
+    display: flex;
     flex-direction: column;
     background-color: white;
     align-items: center;
+    width: 30%;
 }
 
 #Finalizar_veiculo div{

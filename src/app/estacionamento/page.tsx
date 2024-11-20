@@ -10,7 +10,8 @@ import Finalizar_Veiculo from "@/components/Finalizar_Veiculo/Finalizar_Veiculo"
 interface Movimento {
   id: number;
   ativo?: boolean;
-  data: string;
+  data_entrada: string;
+  data_saida: string;
   hora_entrada: string;
   hora_saida: string;
   preco: number;
@@ -43,7 +44,8 @@ export default function Home() {
         .map((row) => ({
           id: row.id,
           ativo: row.ativo,
-          data: row.data,
+          data_entrada: row.data_entrada,
+          data_saida:row.data_saida,
           hora_entrada: row.hora_entrada,
           hora_saida: row.hora_saida,
           preco: row.preco,
