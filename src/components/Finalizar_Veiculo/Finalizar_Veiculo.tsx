@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { UPDATE } from "../../app/api/movimento/route";
+import { GETBYID, UPDATE } from "../../app/api/movimento/route";
 import "./style.css";
 
 interface Movimento {
@@ -27,23 +27,17 @@ export default function Finalizar_Veiculo({ movimento, onClose }: FinalizarWindo
   const [hora, setHora] = useState<string>("");
   const [valor, setValor] = useState<number>(0);
 
-  const calcularValor = () => {
-    const data1 = new Date(movimento.data_entrada);
-    const data2 = new Date(end_data);
+  const calcularValor = async ()  => {
+    console.log(movimento.data_entrada);
+    console.log(end_data);
 
-    const diferencaEmMilissegundos = data2.getTime() - data1.getTime();
-    const diferencaEmDias = diferencaEmMilissegundos / (1000 * 60 * 60 * 24);
+    const diff_in_days = await getDiff(end_data);
 
-    let valorCalculado = diferencaEmDias * (movimento.preco * 10);
+    console.log(diff_in_days);
 
-    const [hora1, minuto1] = movimento.hora_entrada.split(':').map(Number); 
-    const [hora2, minuto2] = hora.split(':').map(Number); 
-    data1.setHours(hora1, minuto1, 0); 
-    data2.setHours(hora2, minuto2, 0);  
-    const diferencaEmMilissegundo = data2.getTime() - data1.getTime(); 
-    const diferencaEmHoras = diferencaEmMilissegundo / (1000 * 60 * 60);
+    const valorCalculado = Number(diff_in_days) * (movimento.preco * 10);
+    console.log(valorCalculado);
 
-    valorCalculado += diferencaEmHoras * movimento.preco;
 
     setValor(valorCalculado);
   }
@@ -57,6 +51,11 @@ export default function Finalizar_Veiculo({ movimento, onClose }: FinalizarWindo
     location.href = "/estacionamento";
     onClose();
   };
+
+  const getDiff = async (data:string) => {
+    const response = await GETBYID(movimento.id, data);
+    return Number(response);
+  }
 
   return (
     <div>
