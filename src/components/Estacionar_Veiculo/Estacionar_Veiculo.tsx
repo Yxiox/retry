@@ -15,7 +15,6 @@ interface EstacionarWindowProps {
 }
 
 export default function Estacionar_Veiculo({Veiculos}:EstacionarWindowProps) {
-  const [data, setData] = useState(Date);
   const [hora, setHora] = useState("");
   const [preco, setPreco] = useState(Number);
   const [carro_id, setCarro] = useState(Number);
@@ -23,12 +22,7 @@ export default function Estacionar_Veiculo({Veiculos}:EstacionarWindowProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    console.log(data);
-    console.log(hora);
-    console.log(preco);
-    console.log(carro_id);
-
-    const response = await POST(true, data, hora, preco, carro_id);
+    const response = await POST(true, hora, preco, carro_id);
     console.log(response);
     location.href = "/estacionamento"
   };
@@ -62,14 +56,7 @@ export default function Estacionar_Veiculo({Veiculos}:EstacionarWindowProps) {
           </button>
         </div>
         <div className="w-full">
-          <input
-            type="date"
-            name="date"
-            id="date"
-            placeholder="Data"
-            value={data}
-            onChange={(e) => setData(e.target.value)}
-          />
+          
           <input
             type="time"
             name="hora"

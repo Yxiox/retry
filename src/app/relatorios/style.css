@@ -38,13 +38,14 @@ main{
     width: 100%;
     border-collapse: collapse;
     font-family: Arial, sans-serif;
+    table-layout: fixed; 
 }
 
 #tabela th, #tabela td {
     padding: 5px;
     text-align: center;
+    word-wrap: break-word; 
 }
-
 #tabela th {
     background-color: #4285F4; 
     color: white;

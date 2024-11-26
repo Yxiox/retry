@@ -1,17 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { GETBYID, UPDATE } from "../../app/api/movimento/route";
+import { UPDATE } from "../../app/api/movimento/route";
 import "./style.css";
 
 interface Movimento {
   id: number;
   ativo?: boolean;
-  data_entrada: string;
-  data_saida: string;
   hora_entrada: string;
   hora_saida: string;
-  preco: number;
+  preco: string;
+  precofim:string,
   carro_id: number;
   placa: string;
   modelo: string;
@@ -23,22 +22,37 @@ interface FinalizarWindowProps {
 }
 
 export default function Finalizar_Veiculo({ movimento, onClose }: FinalizarWindowProps) {
-  const [end_data, setData] = useState<string>("");
   const [hora, setHora] = useState<string>("");
   const [valor, setValor] = useState<number>(0);
 
   const calcularValor = async ()  => {
-    console.log(movimento.data_entrada);
-    console.log(end_data);
+    if (!hora || !movimento.preco) return;
 
-    const diff_in_days = await getDiff(end_data);
-
-    console.log(diff_in_days);
-
-    const valorCalculado = Number(diff_in_days) * (movimento.preco * 10);
-    console.log(valorCalculado);
-
-
+    const precoLimpo = parseFloat(movimento.preco.replace(/[^\d,.-]/g, '').replace(',', '.'));
+    if (isNaN(precoLimpo)) {
+      console.error("Erro ao processar o preço.");
+      setValor(0);
+      return;
+    }
+  
+    const [horaEntrada, minutoEntrada] = movimento.hora_entrada.split(":").map(Number);
+    const [horaSaida, minutoSaida] = hora.split(":").map(Number);
+  
+    const entradaEmMinutos = horaEntrada * 60 + minutoEntrada;
+    const saidaEmMinutos = horaSaida * 60 + minutoSaida;
+  
+    const diferencaEmMinutos = saidaEmMinutos - entradaEmMinutos;
+  
+    if (diferencaEmMinutos < 0) {
+      console.error("Hora de saída deve ser maior que a hora de entrada!");
+      setValor(0);
+      return;
+    }
+  
+    const diferencaEmHoras = diferencaEmMinutos / 60;
+    const valorCalculado = diferencaEmHoras * precoLimpo;
+  
+    console.log(`Valor calculado: R$${valorCalculado.toFixed(2)}`);
     setValor(valorCalculado);
   }
   
@@ -46,16 +60,11 @@ export default function Finalizar_Veiculo({ movimento, onClose }: FinalizarWindo
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const response = await UPDATE(movimento.data_entrada, end_data, hora, movimento.id);
+    const response = await UPDATE(hora, movimento.id, valor);
     console.log(response);
     location.href = "/estacionamento";
     onClose();
   };
-
-  const getDiff = async (data:string) => {
-    const response = await GETBYID(movimento.id, data);
-    return Number(response);
-  }
 
   return (
     <div>
@@ -71,19 +80,14 @@ export default function Finalizar_Veiculo({ movimento, onClose }: FinalizarWindo
           </button>
         </div>
         <div className="w-full">
-          <input
-            type="date"
-            name="date"
-            id="date"
-            placeholder="Data"
-            value={end_data}
-            onChange={(e) => setData(e.target.value)}
-            onBlur={calcularValor} 
-          />
+        
           <input
             type="time"
             name="hora"
             id="hora"
+            min="07:00"
+            max="19:00"
+            required
             placeholder="Hora"
             value={hora}
             onChange={(e) => setHora(e.target.value)}
