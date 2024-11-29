@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { UPDATE } from "../../app/api/movimento/route";
+import { UPDATEEND } from "../../app/api/movimento/route";
 import "./style.css";
 
 interface Movimento {
@@ -60,7 +60,7 @@ export default function Finalizar_Veiculo({ movimento, onClose }: FinalizarWindo
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const response = await UPDATE(hora, movimento.id, valor);
+    const response = await UPDATEEND(hora, movimento.id, valor);
     console.log(response);
     location.href = "/estacionamento";
     onClose();

@@ -19,6 +19,11 @@ export async function GET() {
   return result.rows;
 }
 
+export async function UPDATE(id:number, nome:string, cpf:number) {
+  const rows = await sql`UPDATE cliente SET nome=${nome}, cpf=${cpf} WHERE id=${id};`;
+  return rows.rows;
+}
+
 export async function DELETE(id:number) {
   const result = await sql`DELETE FROM cliente WHERE id = ${id}`;
   return result.rows;

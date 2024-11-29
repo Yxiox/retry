@@ -16,3 +16,7 @@ main input {
     border: 1px solid rgb(110, 110, 255);
     border-radius: 7px;
 }
+
+#password-requirements{
+    color: gray;
+}

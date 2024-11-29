@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { GET } from "../api/usuarios/route";
+import { GET, POST } from "../api/usuarios/route";
 import "./style.css";
 
 interface Usuario {
@@ -19,6 +19,7 @@ export default function Home() {
   const [password_special, setSpecial] = useState(false);
   const [password_weak, setWeakPassword] = useState(false);
   const [weakPasswords, setWeakPasswords] = useState<string[]>([]);
+  const [logado, setLogado] = useState(Boolean);
 
   useEffect(() => {
     const fetchWeakPasswords = async () => {
@@ -51,7 +52,8 @@ export default function Home() {
         console.error("Error fetching data:", error);
       }
     };
-
+    setLogado(false);
+    checkLog();
     fetchData();
   }, []);
 
@@ -61,7 +63,7 @@ export default function Home() {
     setWeakPassword(weakPasswords.includes(pass_input));  
   }, [pass_input, weakPasswords]);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (password_weak) {
       setMessage("A senha inserida é muito fraca. Por favor, escolha outra.");
       return;
@@ -73,9 +75,23 @@ export default function Home() {
 
     if (userExists){
       alert("Usuário já cadastrado!");
+      return;
     }
-    
+    if (!userExists && !password_weak){
+      const response = await POST(user_input, pass_input);
+      console.log(response);
+      location.href = "/login";
+    }
   };
+
+  function checkLog(){
+    if (!logado){
+      const headerButtons = document.getElementById('header_buttons');
+      if(headerButtons){
+        headerButtons.style.display = "none"
+      }
+    }
+  }
 
   return (
     <main>

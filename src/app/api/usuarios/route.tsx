@@ -7,7 +7,7 @@ export async function POST(
   senha:string,
 ) {
   try {
-    const rows = await sql`INSERT INTO user (username, password) VALUES (${usuario}, ${senha})`;
+    const rows = await sql`INSERT INTO users (username, password) VALUES (${usuario}, ${senha})`;
     return rows.rows;
 } catch (error) {
   return error;

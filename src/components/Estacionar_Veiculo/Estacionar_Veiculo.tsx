@@ -22,7 +22,9 @@ export default function Estacionar_Veiculo({Veiculos}:EstacionarWindowProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const response = await POST(true, hora, preco, carro_id);
+    const dataAtual = new Date().toISOString().split("T")[0];
+
+    const response = await POST(true, hora, dataAtual, preco, carro_id);
     console.log(response);
     location.href = "/estacionamento"
   };

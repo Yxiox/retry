@@ -10,7 +10,7 @@ import "./style.css"
 interface Movimento {
     id: number;
     ativo?: boolean;
-    data: string;
+    data_entrada: string;
     hora_entrada: string;
     hora_saida: string;
     preco: number;
@@ -39,7 +39,7 @@ export default function Home(){
             .map((row) => ({
                 id: row.id,
                 ativo: row.ativo,
-                data: row.data,
+                data_entrada: row.data_entrada,
                 hora_entrada: row.hora_entrada,
                 hora_saida: row.hora_saida,
                 preco: row.preco,
@@ -53,7 +53,7 @@ export default function Home(){
             .map((row) => ({
                 id: row.id,
                 ativo: row.ativo,
-                data: row.data,
+                data_entrada: row.data_entrada,
                 hora_entrada: row.hora_entrada,
                 hora_saida: row.hora_saida,
                 preco: row.preco,
@@ -89,6 +89,7 @@ export default function Home(){
 
     return(
         <main>
+            <h1>Veículos ativos e finalizados</h1>
             <PieChart labels={["Ativos", "Finalizados"]} dataValues={[qtd_ativo, qtd_inativo]}></PieChart>
         </main>
     )

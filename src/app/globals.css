@@ -19,18 +19,22 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
 header {
   background-color: #353535;
   color: white;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 #in_line_header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
   padding: 15px;
 }

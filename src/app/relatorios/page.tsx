@@ -9,6 +9,7 @@ interface Movimento {
   ativo?: boolean;
   hora_entrada: string;
   hora_saida: string;
+  data_entrada:string,
   preco: string;
   precofim: string;
   carro_id: number;
@@ -18,6 +19,14 @@ interface Movimento {
 
 export default function Home() {
   const [movimentos, setMovimentos] = useState<Movimento[]>([]);
+
+  const formatDate = (dateString: string): string => {
+    const date = new Date(dateString); // Converte a string para um objeto Date
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // Os meses começam em 0
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
 
   useEffect(() => {
     fetchData();
@@ -33,6 +42,7 @@ export default function Home() {
           ativo: row.ativo,
           hora_entrada: row.hora_entrada,
           hora_saida: row.hora_saida,
+          data_entrada: formatDate(row.data_entrada),
           preco: row.preco,
           precofim: row.precofim,
           carro_id: row.carro_id,
@@ -56,11 +66,13 @@ export default function Home() {
   return (
     <main>
       <div id="main_div">
+        <h1>Relatório Geral</h1>
         <div id="tabela">
           <table>
             <thead>
               <tr>
                 <th>Carro</th>
+                <th>Data</th>
                 <th>Hora Entrada</th>
                 <th>Hora Saída</th>
                 <th>Valor</th>
@@ -72,19 +84,20 @@ export default function Home() {
                   <td>
                     {row.placa} | {row.modelo}
                   </td>
+                  <td>{row.data_entrada}</td>
                   <td>{row.hora_entrada}</td>
                   <td>{row.hora_saida}</td>
-                  <td>{row.precofim}</td>
+                  <td>R{row.precofim}</td>
                 </tr>
               ))}
               <tr>
                 <td
-                  colSpan={3}
+                  colSpan={4}
                   style={{ fontWeight: "bold", textAlign: "right" }}
                 >
                   Total
                 </td>
-                <td style={{ fontWeight: "bold" }}>{calcularTotal()}</td>
+                <td style={{ fontWeight: "bold" }}>R${calcularTotal()}</td>
               </tr>
             </tbody>
           </table>

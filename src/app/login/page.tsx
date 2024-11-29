@@ -15,7 +15,8 @@ export default function Home() {
   const [inputUsername, setInputUsername] = useState("");
   const [inputPassword, setInputPassword] = useState("");
   const [message, setMessage] = useState("");
-
+  const [logado, setLogado] = useState(Boolean);
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -30,9 +31,21 @@ export default function Home() {
         console.error("Error fetching data:", error);
       }
     };
-
+    setLogado(false);
+    checkLog();
     fetchData();
   }, []);
+
+  function checkLog(){
+    if (!logado){
+      const headerButtons = document.getElementById('header_buttons');
+      if(headerButtons){
+        headerButtons.style.display = "none"
+      }
+    }
+
+
+  }
 
   const handleSubmit = () => {
     const userExists = usuarios.some(
@@ -41,6 +54,8 @@ export default function Home() {
 
     if (userExists) {
       setMessage("Logado com sucesso!");
+      setLogado(true);
+      window.location.href = "/estacionamento"
     } else {
       setMessage("Nome de usuário ou senha inválidos.");
     }
@@ -69,6 +84,7 @@ export default function Home() {
       id="submit">
         Submit
       </button>
+      <a href="/registro">Não tem cadastro? Cadastre-se</a>
       {message && <p id="return">{message}</p>}
  </main>
   );
