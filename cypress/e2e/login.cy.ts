@@ -9,7 +9,7 @@ describe("Login Screen", () => {
 
     cy.contains("button", "Submit").click();
 
-    cy.contains("Logado com sucesso!");
+    cy.url().should("include", "/estacionamento");
   });
 
   it("Erro no login", () => {
