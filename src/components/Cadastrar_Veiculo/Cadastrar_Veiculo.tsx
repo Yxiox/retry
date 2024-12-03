@@ -26,6 +26,8 @@ export default function Cadastrar_Window({ clientes }: CadastrarWindowProps) {
       const response = await POST(placa, modelo, cor, Number(cliente_id));
       console.log(response);
       location.href = "/veiculos";
+    }else{
+      alert("Quantidade de caracteres de placa inválidos");
     }
   };
 
@@ -90,7 +92,7 @@ export default function Cadastrar_Window({ clientes }: CadastrarWindowProps) {
             value={cliente_id}
             onChange={(e) => setCliente(e.target.value)}
           >
-            <option value="">Select Client</option>
+            <option value="">Selecione o cliente</option>
             {clientes.map((cliente) => (
               <option key={cliente.id} value={cliente.id}>
                 {cliente.nome}

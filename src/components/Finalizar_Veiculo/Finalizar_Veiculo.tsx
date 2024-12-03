@@ -44,7 +44,7 @@ export default function Finalizar_Veiculo({ movimento, onClose }: FinalizarWindo
     const diferencaEmMinutos = saidaEmMinutos - entradaEmMinutos;
   
     if (diferencaEmMinutos < 0) {
-      console.error("Hora de saída deve ser maior que a hora de entrada!");
+      alert("Hora de saída deve ser maior que a hora de entrada!");
       setValor(0);
       return;
     }
@@ -52,18 +52,25 @@ export default function Finalizar_Veiculo({ movimento, onClose }: FinalizarWindo
     const diferencaEmHoras = diferencaEmMinutos / 60;
     const valorCalculado = diferencaEmHoras * precoLimpo;
   
-    console.log(`Valor calculado: R$${valorCalculado.toFixed(2)}`);
-    setValor(valorCalculado);
+    if(diferencaEmHoras > 0){
+      console.log(`Valor calculado: R$${valorCalculado.toFixed(2)}`);
+      setValor(valorCalculado);
+
+    }else{
+      alert("Hora inválida");
+    }
   }
   
   
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const response = await UPDATEEND(hora, movimento.id, valor);
-    console.log(response);
-    location.href = "/estacionamento";
-    onClose();
+    if(valor > 0){
+      const response = await UPDATEEND(hora, movimento.id, valor);
+      console.log(response);
+      location.href = "/estacionamento";
+      onClose();
+    }
   };
 
   return (

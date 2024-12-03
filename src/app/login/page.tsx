@@ -68,7 +68,7 @@ export default function Home() {
         type="text"
         name="user"
         id="user"
-        placeholder="Username"
+        placeholder="Usuário"
         value={inputUsername}
         onChange={(e) => setInputUsername(e.target.value)}
         />
@@ -76,7 +76,7 @@ export default function Home() {
         type="password"
         name="password"
         id="password"
-        placeholder="Password"
+        placeholder="Senha"
         value={inputPassword}
         onChange={(e) => setInputPassword(e.target.value)}
         />
